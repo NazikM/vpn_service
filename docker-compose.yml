@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  # PostgreSQL database
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Django web application
+  web:
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - ./vpn_service_project:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DJANGO_DB_HOST: db
+      DJANGO_DB_PORT: 5432
+      DJANGO_DB_NAME: ${DB_NAME}
+      DJANGO_DB_USER: ${DB_USER}
+      DJANGO_DB_PASSWORD: ${DB_PASSWORD}
+      DEBUG: ${DEBUG}
+      SECRET_KEY: ${SECRET_KEY}
+volumes:
+  postgres_data:

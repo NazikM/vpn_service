@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<div class="container-fluid">
+<h1 style="text-align: center" class="mt-2">Sites stat</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Site</th>
+      <th scope="col">Transitions</th>
+      <th scope="col">Uploaded data (bytes)</th>
+      <th scope="col">Downloaded data (bytes)</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for site in object_list %}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{ site.site }}</td>
+      <td>{{ site.transitions }}</td>
+      <td>{{ site.uploaded_data }}</td>
+      <td>{{ site.downloaded_data }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

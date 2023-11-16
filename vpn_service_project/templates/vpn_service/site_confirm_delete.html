@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <div class="row justify-content-center">
+      <div class="col-md-6">
+      <form method="post">
+          {% csrf_token %}
+        <div class="card mt-4">
+                    <div class="card-header">
+                        You really want to delete the following site data: <b>{{ object.name }}</b>?
+                    </div>
+                    <div class="card-body">
+                        {{ object.url }}
+                    </div>
+                    <div class="card-footer">
+                        <center>
+                            <button type="submit"  class="btn btn-danger">Delete</button>
+                        </center>
+                    </div>
+        </div>
+      </form>
+  </div>
+  </div>
+{% endblock %}

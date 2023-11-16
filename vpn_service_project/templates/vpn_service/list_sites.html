@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<div class="container-fluid">
+<h1 style="text-align: center" class="mt-2">Sites</h1>
+<div class="row">
+<div class="col-md-4">
+    <div class="card mt-4">
+                <div class="card-header">
+                    Don't see your site?
+                </div>
+                <div class="card-body">
+                    No worries, you can create them 😀
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'vpn:create' %}"  class="btn btn-success">Create now</a>
+                </div>
+    </div>
+</div>
+{% for site in object_list %}
+<div class="col-md-4">
+    <div class="card mt-4">
+        <div class="card-header">
+            {{ site.name }}
+        </div>
+        <div class="card-body">
+            {{ site.url }}
+        </div>
+        <div class="card-footer">
+            <a href="http://localhost:8000/{{ site.name }}/{{ site.url }}" class="btn btn-primary">Run</a>
+            <a href="{% url 'vpn:delete' site.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+</div>
+
+
+{% endblock %}
